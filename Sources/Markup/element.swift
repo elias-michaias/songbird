@@ -83,6 +83,13 @@ public func blockquote(_ attributes: HtmlAttr..., @ViewBuilder content: () -> [V
     return blockquote(attributes, content: content)
 }
 
+public func body(_ attributes: [HtmlAttr], @ViewBuilder content: () -> [ViewContent] = {[]}) -> ViewElement {
+    return ViewElement(tag: "body", reactive: false, attributes: attributes, children: content())
+}
+public func body(_ attributes: HtmlAttr..., @ViewBuilder content: () -> [ViewContent] = {[]}) -> ViewElement {
+    return body(attributes, content: content)
+}
+
 public func br(_ attributes: [HtmlAttr]) -> ViewElement {
     return ViewElement(tag: "br", reactive: false, attributes: attributes, children: [])
 }

@@ -8,11 +8,11 @@ public struct HtmlAttr: KeyValueAssignable, Sendable, Equatable {
         self.val = val
     }
 
-    public static func attr(key: String) -> HtmlAttr {
+    public static func attr(_ key: String) -> HtmlAttr {
         return HtmlAttr(key: key)
     }
 
-    public static func data(key: String) -> HtmlAttr {
+    public static func data(_ key: String) -> HtmlAttr {
         return HtmlAttr(key: "data-\(key)")
     }
 
