@@ -1,19 +1,23 @@
 // MARK: - HTML Attribute Type
 public struct HtmlAttr: KeyValueAssignable, Sendable, Equatable {
     public var key: String
-    public var value: String?
+    public var val: String?
 
-    public init(key: String, value: String? = nil) {
+    public init(key: String, val: String? = nil) {
         self.key = key
-        self.value = value
+        self.val = val
     }
 
     public static func attr(key: String) -> HtmlAttr {
         return HtmlAttr(key: key)
     }
 
+    public static func data(key: String) -> HtmlAttr {
+        return HtmlAttr(key: "data-\(key)")
+    }
+
     public static func == (lhs: HtmlAttr, rhs: HtmlAttr) -> Bool {
-        return lhs.key == rhs.key && lhs.value == rhs.value
+        return lhs.key == rhs.key && lhs.val == rhs.val
     }
 }
 

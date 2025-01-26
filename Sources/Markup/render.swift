@@ -9,7 +9,7 @@ public extension ViewElement {
         // Render attributes
         if !attributes.isEmpty {
             let attributesHTML = attributes.map { attribute in
-                attribute.value == nil ? attribute.key : "\(attribute.key)=\"\(attribute.value!)\""
+                attribute.val == nil ? attribute.key : "\(attribute.key)=\"\(attribute.val!)\""
             }.joined(separator: " ")
             html += " \(attributesHTML)"
         }

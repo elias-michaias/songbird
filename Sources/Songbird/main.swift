@@ -20,6 +20,7 @@ func counter(initial: Int) -> ViewElement {
         button(.x.on.click => "count++") {
             "Click me!"
         }
+        br()
         div(specialAttrs())
     }
 }

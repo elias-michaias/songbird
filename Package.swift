@@ -12,7 +12,7 @@ let package = Package(
     ],
     targets: [
         // Songbird target
-        .target(
+        .executableTarget(
             name: "Songbird",
             dependencies: ["Markup", "Alpine", "HTMX"]
         ),

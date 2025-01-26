@@ -12,8 +12,8 @@ public extension HtmlAttr {
         public static func transition(_ configs: XTransitionConfig...) -> HtmlAttr {
             var base = HtmlAttr(key: "x-transition")
             let modifiers = configs.compactMap { config -> String? in
-                guard let value = config.value else { return nil }
-                return config.key.replacingOccurrences(of: "{}", with: value)
+                guard let val = config.val else { return nil }
+                return config.key.replacingOccurrences(of: "{}", with: val)
             }
             if !modifiers.isEmpty {
                 base.key += modifiers.joined()
@@ -30,24 +30,24 @@ public extension HtmlAttr {
 // MARK: - XTransitionConfig
 public struct XTransitionConfig: KeyValueAssignable {
     public var key: String
-    public var value: String?
+    public var val: String?
 
-    public init(key: String, value: String? = nil) {
+    public init(key: String, val: String? = nil) {
         self.key = key
-        self.value = value
+        self.val = val
     }
 
     // MARK: - XTransitionConfig Helper Methods
     public static func duration(_ duration: Int? = nil) -> XTransitionConfig {
-        return XTransitionConfig(key: ".duration.{}ms", value: duration != nil ? "\(duration!)" : nil)
+        return XTransitionConfig(key: ".duration.{}ms", val: duration != nil ? "\(duration!)" : nil)
     }
 
     public static func delay(_ delay: Int? = nil) -> XTransitionConfig {
-        return XTransitionConfig(key: ".delay.{}ms", value: delay != nil ? "\(delay!)" : nil)
+        return XTransitionConfig(key: ".delay.{}ms", val: delay != nil ? "\(delay!)" : nil)
     }
 
-    public static func custom(key: String, value: String) -> XTransitionConfig {
-        return XTransitionConfig(key: key, value: value)
+    public static func custom(key: String, val: String) -> XTransitionConfig {
+        return XTransitionConfig(key: key, val: val)
     }
 }
 
