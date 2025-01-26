@@ -46,5 +46,9 @@ let package = Package(
             name: "CompatTests",
             dependencies: ["Songbird", "Markup", "Alpine", "HTMX"]
         ),
+        .testTarget(
+            name: "SpecTests", 
+            dependencies: ["Songbird", "Markup"]
+        ),
     ]
 )

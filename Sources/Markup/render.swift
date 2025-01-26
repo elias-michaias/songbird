@@ -3,6 +3,12 @@ import Foundation
 // MARK: - HTML Renderer
 public extension ViewElement {
     func render() -> String {
+        // List of self-closing tags
+        let selfClosingTags = [
+            "area", "base", "br", "col", "embed", "hr", "img", "input", "link", 
+            "meta", "source", "track", "wbr"
+        ]
+
         // Start with the opening tag
         var html = "<\(tag)"
 
@@ -13,20 +19,27 @@ public extension ViewElement {
             }.joined(separator: " ")
             html += " \(attributesHTML)"
         }
-        html += ">" // Close the opening tag
 
-        // Render children
-        for child in children {
-            switch child {
-            case .text(let textContent):
-                html += escapeHTML(textContent)
-            case .element(let childElement):
-                html += childElement.render() // Recursive call
+        // Check if it's a self-closing tag
+        if selfClosingTags.contains(tag) {
+            html += " />"
+        } else {
+            html += ">" // Close the opening tag
+
+            // Render children
+            for child in children {
+                switch child {
+                case .text(let textContent):
+                    html += escapeHTML(textContent)
+                case .element(let childElement):
+                    html += childElement.render() // Recursive call
+                }
             }
+
+            // Add the closing tag
+            html += "</\(tag)>"
         }
 
-        // Add the closing tag
-        html += "</\(tag)>"
         return html
     }
 
