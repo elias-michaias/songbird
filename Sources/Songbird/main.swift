@@ -25,4 +25,14 @@ func counter(initial: Int) -> ViewElement {
     }
 }
 
-print(counter(initial: 1).render())
+let doc = 
+document { 
+    html {
+        body {
+            counter(initial: 1) 
+        }
+    }
+}
+
+print(doc.render())
+

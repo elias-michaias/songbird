@@ -1,4 +1,8 @@
 // MARK: - HTML Element Functions
+public func document(@ViewBuilder content: () -> [ViewContent] = {[]}) -> ViewElement {
+    return ViewElement(tag: "!DOCTYPE html", reactive: false, attributes: [], children: content())
+}
+
 public func a(_ attributes: [HtmlAttr], @ViewBuilder content: () -> [ViewContent] = {[]}) -> ViewElement {
     return ViewElement(tag: "a", reactive: false, attributes: attributes, children: content())
 }
@@ -600,7 +604,6 @@ public func strong(_ attributes: [HtmlAttr], @ViewBuilder content: () -> [ViewCo
 public func strong(_ attributes: HtmlAttr..., @ViewBuilder content: () -> [ViewContent] = {[]}) -> ViewElement {
     return strong(attributes, content: content)
 }
-
 public func sub(_ attributes: [HtmlAttr], @ViewBuilder content: () -> [ViewContent] = {[]}) -> ViewElement {
     return ViewElement(tag: "sub", reactive: false, attributes: attributes, children: content())
 }

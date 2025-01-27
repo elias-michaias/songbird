@@ -36,8 +36,10 @@ public extension ViewElement {
                 }
             }
 
-            // Add the closing tag
-            html += "</\(tag)>"
+            if tag != "!DOCTYPE html" {
+                // Add the closing tag
+                html += "</\(tag)>"
+            }
         }
 
         return html
