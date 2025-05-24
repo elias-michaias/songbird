@@ -2,7 +2,7 @@
 
 import Foundation
 
-public struct AttributeKey<T> {
+public struct AttributeKey<T: Sendable> {
     public let key: String
     public init(key: String) {
         self.key = key

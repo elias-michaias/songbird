@@ -3,7 +3,7 @@
 import Foundation // Or any other necessary imports
 
 // Protocol for common behavior of typed attributes (key and string rendering)
-public protocol AttributeErased {
+public protocol AttributeErased: Sendable {
     var key: String { get }
     func stringValue() -> String?
     var isBooleanTrue: Bool { get }
@@ -14,7 +14,7 @@ public protocol AttributeErased {
 }
 
 // Generic struct to hold a strongly-typed attribute
-public struct TypedAttribute<T>: AttributeErased {
+public struct TypedAttribute<T: Sendable>: AttributeErased, Sendable { // Added T: Sendable and explicit Sendable
     public let key: String
     public let value: T? // Value is optional to allow for attributes like 'disabled' with no explicit value
 

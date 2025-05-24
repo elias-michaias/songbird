@@ -3,7 +3,7 @@
 import Foundation // Or any other necessary imports
 
 // Type-erased wrapper for any TypedAttribute
-public struct AnyAttribute {
+public struct AnyAttribute: Sendable { // Added Sendable
     private let erased: AttributeErased
 
     public var key: String {
