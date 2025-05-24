@@ -59,7 +59,7 @@ import Testing
     // This was non-standard. The new way is to use classes or specific phase attributes.
     // If the intent was to use global transition classes:
     let element = div(
-        Attr.class => "transition duration-500 delay-100", // Global CSS classes
+        .class => "transition duration-500 delay-100", // Changed Attr.class to .class
         .x.transitionEnter => "ease-out",
         .x.transitionEnterStart => "opacity-0",
         .x.transitionEnterEnd => "opacity-100",

@@ -1,30 +1,32 @@
-import Markup
+// Sources/Compat/Alpine/alpine.swift
+import Markup // For AttributeKey
 
-// MARK: - Attr Extensions for Alpine.js
-public extension Attr {
-    struct x {
-        public static let data = AttributeKey<String>(key: "x-data")
-        public static let `init` = AttributeKey<String>(key: "x-init")
-        public static let bind = AttributeKey<String>(key: "x-bind")
-        public static let text = AttributeKey<String>(key: "x-text")
-        public static let show = AttributeKey<String>(key: "x-show")
+public struct XAttributes {
+    public let data = AttributeKey<String>(key: "x-data")
+    public let `init` = AttributeKey<String>(key: "x-init") // Ensure backticks for 'init'
+    public let bind = AttributeKey<String>(key: "x-bind")
+    public let text = AttributeKey<String>(key: "x-text")
+    public let show = AttributeKey<String>(key: "x-show")
 
-        // For the main x-transition attribute (often boolean or with simple modifiers like 'opacity')
-        public static let transition = AttributeKey<String>(key: "x-transition")
+    // Transition attributes
+    public let transition = AttributeKey<String>(key: "x-transition")
+    public let transitionEnter = AttributeKey<String>(key: "x-transition:enter")
+    public let transitionEnterStart = AttributeKey<String>(key: "x-transition:enter-start")
+    public let transitionEnterEnd = AttributeKey<String>(key: "x-transition:enter-end")
+    public let transitionLeave = AttributeKey<String>(key: "x-transition:leave")
+    public let transitionLeaveStart = AttributeKey<String>(key: "x-transition:leave-start")
+    public let transitionLeaveEnd = AttributeKey<String>(key: "x-transition:leave-end")
 
-        // Specific phase attributes for transitions
-        public static let transitionEnter      = AttributeKey<String>(key: "x-transition:enter")
-        public static let transitionEnterStart = AttributeKey<String>(key: "x-transition:enter-start")
-        public static let transitionEnterEnd   = AttributeKey<String>(key: "x-transition:enter-end")
-        public static let transitionLeave      = AttributeKey<String>(key: "x-transition:leave")
-        public static let transitionLeaveStart = AttributeKey<String>(key: "x-transition:leave-start")
-        public static let transitionLeaveEnd   = AttributeKey<String>(key: "x-transition:leave-end")
-
-        public struct on {
-            public static let click = AttributeKey<String>(key: "x-on:click")
-        }
+    // Nested struct for x-on events
+    public struct On {
+        public let click = AttributeKey<String>(key: "x-on:click")
+        // Add other x-on events here if needed, e.g.:
+        // public let mouseenter = AttributeKey<String>(key: "x-on:mouseenter")
     }
+
+    /// Accessor for Alpine x-on event attributes (e.g., x.on.click).
+    public let on = On()
 }
 
-// XTransitionConfig and its helper methods are fully removed.
-
+/// Accessor for Alpine.js 'x-' attributes (e.g., x.data, x.show, x.on.click).
+public let x = XAttributes()
