@@ -2,7 +2,7 @@
 
 import Foundation
 
-public struct AttributeKey<T: Sendable> {
+public struct AttributeKey<T: Sendable>: Sendable { // Added : Sendable conformance
     public let key: String
     public init(key: String) {
         self.key = key
