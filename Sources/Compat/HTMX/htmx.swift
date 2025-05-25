@@ -1,7 +1,7 @@
 // Sources/Compat/HTMX/htmx.swift
 import Markup // For AttributeKey
 
-public struct HxAttributes {
+public struct HxAttributes: Sendable { // Added : Sendable
     // Request attributes
     public let get = AttributeKey<String>(key: "hx-get")
     public let post = AttributeKey<String>(key: "hx-post")

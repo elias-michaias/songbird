@@ -1,7 +1,7 @@
 // Sources/Markup/event.swift
 import Markup // For AttributeKey
 
-public struct EventAttributes {
+public struct EventAttributes: Sendable { // Added : Sendable conformance
     // Standard HTML Event Attributes
     public let abort = AttributeKey<String>(key: "onabort")
     public let afterprint = AttributeKey<String>(key: "onafterprint")
