@@ -14,10 +14,19 @@ public extension ViewElement {
 
         // Render attributes
         if !attributes.isEmpty {
-            let attributesHTML = attributes.map { attribute in
-                attribute.val == nil ? attribute.key : "\(attribute.key)=\"\(attribute.val!)\""
-            }.joined(separator: " ")
-            html += " \(attributesHTML)"
+            let attributeStrings = attributes.compactMap { attribute -> String? in
+                if attribute.isBooleanTrue {
+                    return attribute.key // Render only key for true booleans
+                } else if let valueString = attribute.stringValue() {
+                    // If valueString is empty (e.g. for some specific attributes like `alt=""`),
+                    // it will correctly render as key="".
+                    return "\(attribute.key)=\"\(escapeAttributeValue(valueString))\""
+                }
+                return nil // Skip attribute if not boolean true and no string value, or if stringValue is nil
+            }
+            if !attributeStrings.isEmpty {
+                html += " " + attributeStrings.joined(separator: " ")
+            }
         }
 
         // Check if it's a self-closing tag
@@ -53,5 +62,13 @@ public extension ViewElement {
             .replacingOccurrences(of: ">", with: "&gt;")
             .replacingOccurrences(of: "\"", with: "&quot;")
             .replacingOccurrences(of: "'", with: "&#39;")
+    }
+
+    private func escapeAttributeValue(_ string: String) -> String {
+        // Basic escaping for attribute values. HTML spec is complex, but & and " are key.
+        // Values can also not contain < or > usually, but quotes and ampersands are most critical.
+        return string
+            .replacingOccurrences(of: "&", with: "&amp;")
+            .replacingOccurrences(of: "\"", with: "&quot;")
     }
 }

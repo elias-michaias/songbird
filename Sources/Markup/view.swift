@@ -1,26 +1,3 @@
-// MARK: - HTML Attribute Type
-public struct HtmlAttr: KeyValueAssignable, Sendable, Equatable {
-    public var key: String
-    public var val: String?
-
-    public init(key: String, val: String? = nil) {
-        self.key = key
-        self.val = val
-    }
-
-    public static func attr(_ key: String) -> HtmlAttr {
-        return HtmlAttr(key: key)
-    }
-
-    public static func data(_ key: String) -> HtmlAttr {
-        return HtmlAttr(key: "data-\(key)")
-    }
-
-    public static func == (lhs: HtmlAttr, rhs: HtmlAttr) -> Bool {
-        return lhs.key == rhs.key && lhs.val == rhs.val
-    }
-}
-
 // MARK: - ViewContent Enum
 public enum ViewContent : Equatable, Sendable {
     case text(String)
@@ -42,13 +19,13 @@ public enum ViewContent : Equatable, Sendable {
 public struct ViewElement : Equatable, Sendable {
     public let tag: String
     public let reactive: Bool
-    public let attributes: [HtmlAttr]
+    public let attributes: [AnyAttribute] // Changed from [HtmlAttr]
     public let children: [ViewContent]
 
     public init(
         tag: String,
         reactive: Bool,
-        attributes: [HtmlAttr] = [],
+        attributes: [AnyAttribute] = [], // Changed from [HtmlAttr]
         children: [ViewContent] = []
     ) {
         self.tag = tag
@@ -60,7 +37,7 @@ public struct ViewElement : Equatable, Sendable {
     public static func == (lhs: ViewElement, rhs: ViewElement) -> Bool {
         return lhs.tag == rhs.tag &&
             lhs.reactive == rhs.reactive &&
-            lhs.attributes == rhs.attributes &&
+            lhs.attributes == rhs.attributes && // Use direct comparison now that AnyAttribute is Equatable
             lhs.children == rhs.children
     }
 }
